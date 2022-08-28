@@ -13,7 +13,7 @@ def signup(request):
         if form.is_valid():
             form.save()
             # return redirect('/login') #in khat baraye redirect karadan safhe b login mibashad
-            return HttpResponse('user has been created')
+            return HttpResponse('user has been created ')
 
 
 
