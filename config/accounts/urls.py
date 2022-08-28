@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import signup, View
+from .views import signup
+from accounts.views import signup, Login
+
 
 urlpatterns = [
-    path('signup/',signup, name = 'accounts' ),
-    path('login/',View.as_view(), name = 'login')
-    
-]
+    path('signup/', signup.as_view(), name = 'signup'),
+    path('', Login.as_view(), name = 'login')
 
-#error 504
+]

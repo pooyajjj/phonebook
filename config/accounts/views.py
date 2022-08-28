@@ -1,37 +1,55 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  UserCreationForm , AuthenticationForm
 from django.http import HttpResponse
-from django.contrib.auth import login
 from django.views import View
+from django.contrib.auth import authenticate
+from django.core.exceptions import ValidationError
 
-#this views is function base we need class base viwes 
-#im converting function base to class base 
-
-def signup(request):
-    if request.method == 'POST':
+class signup(View):
+    def get(self, request):
+        return render(request, 'tmp/signup.html', {'form': UserCreationForm()})
+    
+    def post(self, request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            # return redirect('/login') #in khat baraye redirect karadan safhe b login mibashad
-            return HttpResponse('user has been created ')
+            user = form.save()
+            return redirect('/login')
+
+        return render(request, 'tmp/signup.html', {'form': UserCreationForm()})
+
+class Login(View):
+    def get(self, request):
+        return render(request, 'tmp/login.html', {'form': AuthenticationForm })
+
+    def post(self, request):
+        form = AuthenticationForm(request, data = request.POST)
+        if form.is_valid():
+            user = authenticate(
+                request,
+                username=form.cleaned_data.get('username'),
+                password=form.cleaned_data.get('password')
+            )
+
+            if user is None :
+                return render(
+
+                    request,
+                    'tmp/login.html',
+                    { 'form': form, 'invalid_creds': True }
+
+                )
+
+            try:
+                form.confirm_login_allowed(user)
+
+            except ValidationError:
+
+                return render(
+                    request,
+                    'tmp/login.html',
+                    { 'form': form, 'invalid_creds': True }
+
+                )
 
 
-
-    form = UserCreationForm()
-    return render(request, 'signup/signup.html',{'form':form})
-
-
-class login(View):
-    def login(request):
-        if request == 'POST' :
-            form = AuthenticationForm(data = request.POST)
-            if form.is_valid():
-                user = form.save()
-                user = form.get_user()
-                login(request, user)
-                return redirect('/signup')
-#bayad be 2 fanction tabdil shavad (get & post)
-
-        form = AuthenticationForm()
-        return render(request, 'signup/login.html',{'form':form})
-
+            return redirect('phonebook/')
