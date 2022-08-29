@@ -53,3 +53,6 @@ class Login(View):
 
 
             return redirect('phonebook/')
+
+def num(request):
+    return render (request, 'tmp/phonebook.html')
