@@ -56,6 +56,6 @@ class Login(View):
 
 def num(request):
     context = {
-        'contacts': phonenum.objects.all()
+        'phonenums': phonenum.objects.all()
     }
     return render (request,'tmp/phonebook.html',context)

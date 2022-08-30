@@ -5,3 +5,6 @@ from django.db import models
 class phonenum(models.Model):
     name = models.CharField(max_length = 200)
     phone_num = models.CharField (max_length = 11)
+
+def __str__(self):
+    return self.name
