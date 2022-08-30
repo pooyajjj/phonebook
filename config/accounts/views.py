@@ -4,6 +4,9 @@ from django.views import View
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
 from .models import phonenum
+from django.views.generic import TemplateView, ListView
+from django.db.models import Q
+
 
 class signup(View):
     def get(self, request):
@@ -59,3 +62,15 @@ def num(request):
         'phonenums': phonenum.objects.all()
     }
     return render (request,'tmp/phonebook.html',context)
+
+
+class SearchResultsView(ListView):
+    model = phonenum
+    template_name = 'tmp/search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        object_list = phonenum.objects.filter(
+            Q(name__icontains=query)
+        )
+        return object_list

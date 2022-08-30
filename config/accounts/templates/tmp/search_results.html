@@ -1,0 +1,9 @@
+<h1>Search Results</h1>
+
+<ul>
+  {% for phonenum in object_list %}
+    <li>
+      {{phonenum.name}}, {{phonenum.phone_num}}
+    </li>
+  {% endfor %}
+</ul>

@@ -1,6 +1,15 @@
+<h1>phone book</h1>
+<a href="/createcontact">for add contact press me</a>
+
+<form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Search...">
+</form>
+
 {% for phonenum in phonenums %}
     <phonenum>
-        <h1>{{phonenum.name}},{{phonenum.phone_num}}</h1>
+        <h3>name: {{phonenum.name}} </h3>
+        <h4>number: {{phonenum.phone_num}}</h4>
+        <h5>-----------------------------------</h5>
         
     </phonenum>
 {% endfor %}
