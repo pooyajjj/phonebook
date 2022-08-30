@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  UserCreationForm , AuthenticationForm
-from django.http import HttpResponse
 from django.views import View
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
+from .models import phonenum
 
 class signup(View):
     def get(self, request):
@@ -55,4 +55,7 @@ class Login(View):
             return redirect('phonebook/')
 
 def num(request):
-    return render (request, 'tmp/phonebook.html')
+    context = {
+        'contacts': phonenum.objects.all()
+    }
+    return render (request,'tmp/phonebook.html',context)
