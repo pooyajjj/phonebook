@@ -1,3 +1,4 @@
+from ast import Num
 import imp
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  UserCreationForm , AuthenticationForm
@@ -86,7 +87,7 @@ def add(request):
 
 def addrecord(request):
     x = request.POST['first']
-    y = request.POST['num']
+    y = request.POST['last']
     Phonenum = phonenum(name = x, phone_num = y)
     Phonenum.save()
     return HttpResponseRedirect(reverse('phonebook'))
