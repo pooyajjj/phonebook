@@ -1,3 +1,4 @@
+import imp
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  UserCreationForm , AuthenticationForm
 from django.views import View
@@ -6,6 +7,9 @@ from django.core.exceptions import ValidationError
 from .models import phonenum
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import loader
+from django.urls import reverse
 
 
 class signup(View):
@@ -74,3 +78,15 @@ class SearchResultsView(ListView):
             Q(name__icontains=query)
         )
         return object_list
+
+def add(request):
+    template = loader.get_template('tmp/add.html')
+    return HttpResponse(template.render({}, request))
+
+
+def addrecord(request):
+    x = request.POST['first']
+    y = request.POST['num']
+    Phonenum = phonenum(name = x, phone_num = y)
+    Phonenum.save()
+    return HttpResponseRedirect(reverse('phonebook'))
