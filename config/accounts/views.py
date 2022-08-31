@@ -87,7 +87,7 @@ def add(request):
 
 def addrecord(request):
     x = request.POST['first']
-    y = request.POST['number']
+    y = request.POST['last']
     Phonenum = phonenum(name = x, phone_num = y)
     Phonenum.save()
     return HttpResponseRedirect(reverse('phonebook'))
