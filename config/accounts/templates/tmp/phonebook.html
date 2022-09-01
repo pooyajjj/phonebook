@@ -1,4 +1,4 @@
-<h1>phone book</h1>
+<!-- <h1>phone book</h1>
 <a href="/add">for add contact press me</a>
 
 <form action="{% url 'search_results' %}" method="get">
@@ -9,8 +9,24 @@
     <phonenum>
         <h3>name: {{phonenum.name}} </h3>
         <h4>number: {{phonenum.phone_num}}</h4>
-        <a href="delete/{{ phonenum.id }}/">delete</a>
+        <a href="delete/{{ phonenum.id }}">delete</a>
         <h5>-----------------------------------</h5>
         
     </phonenum>
+{% endfor %} -->
+<h1>phone book</h1>
+<a href="/add">for add contact press me</a>
+
+<form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Search...">
+</form>
+<table border="1">
+{% for phonenum in phonenums %}
+<tr>
+<td>{{phonenum.name}}</td>
+<td>{{phonenum.phone_num}}</td>
+<td><a href="delete/{{ phonenum.id }}">delete</a>
+<td><a href="update/{{ phonenum.id }}">edit</a></td>
+</tr>
 {% endfor %}
+</table>

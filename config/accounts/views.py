@@ -91,7 +91,26 @@ def addrecord(request):
     Phonenum.save()
     return HttpResponseRedirect(reverse('phonebook'))
 
-def delete(request,id):
-    Phonenum = phonenum.objects.get(id)
-    Phonenum.delete()
-    return HttpResponseRedirect(reverse('phonebook'))
+
+
+def delete(request, id):
+  Phonenum = phonenum.objects.get(id = id)
+  Phonenum.delete()
+  return HttpResponseRedirect(reverse('phonebook'))
+
+def update(request, id):
+  mymember = phonenum.objects.get(id = id)
+  template = loader.get_template('tmp/update.html')
+  context = {
+    'mymember': mymember,
+  }
+  return HttpResponse(template.render(context, request))
+
+def updaterecord(request, id):
+  first = request.POST['first']
+  last = request.POST['last']
+  Phonenum = phonenum.objects.get(id=id)
+  Phonenum.name = first
+  Phonenum.phone_num = last
+  Phonenum.save()
+  return HttpResponseRedirect(reverse('phonebook'))
