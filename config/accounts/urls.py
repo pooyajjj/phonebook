@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import signup, num, add, addrecord
+from .views import signup, num, add, addrecord, delete
 from accounts.views import signup, Login,SearchResultsView
 
 
@@ -10,4 +10,5 @@ urlpatterns = [
     path("search/", SearchResultsView.as_view(), name="search_results"),
     path('add/',add, name='add'),
     path('add/addrecord/', addrecord, name='tmp/addrecord'),
+    path('delete/5/',delete , name = 'delete/5')
 ]

@@ -1,5 +1,4 @@
-from ast import Num
-import imp
+from dataclasses import is_dataclass
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  UserCreationForm , AuthenticationForm
 from django.views import View
@@ -90,4 +89,9 @@ def addrecord(request):
     y = request.POST['last']
     Phonenum = phonenum(name = x, phone_num = y)
     Phonenum.save()
+    return HttpResponseRedirect(reverse('phonebook'))
+
+def delete(request,id):
+    Phonenum = phonenum.objects.get(id)
+    Phonenum.delete()
     return HttpResponseRedirect(reverse('phonebook'))
