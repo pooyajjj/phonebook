@@ -14,13 +14,13 @@ from django.urls import reverse
 
 class signup(View):
     def get(self, request):
-        return render(request, 'tmp/signup.html', {'form': UserCreationForm()})
+        return render(request, 'tmp/signup.html', {'form': UserCreationForm()},)
     
     def post(self, request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('/login')
+            return redirect('/')
 
         return render(request, 'tmp/signup.html', {'form': UserCreationForm()})
 
