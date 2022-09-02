@@ -1,11 +1,10 @@
-from dataclasses import is_dataclass
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  UserCreationForm , AuthenticationForm
 from django.views import View
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
 from .models import phonenum
-from django.views.generic import TemplateView, ListView
+from django.views.generic import ListView
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
