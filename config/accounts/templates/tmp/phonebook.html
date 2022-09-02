@@ -1,20 +1,47 @@
-<center> 
-<h1>phone book</h1>
-<a href="/add">for add contact press me</a>
-<br/><br/><br/>
+{% extends "./base/index.html" %}
 
-<form action="{% url 'search_results' %}" method="get">
-  <input name="q" type="text" placeholder="Search...">
-  <input type="submit" value="search">
-</form>
-<table border="1">
-{% for phonenum in phonenums %}
-<tr>
-<td>{{phonenum.name}}</td>
-<td>{{phonenum.phone_num}}</td>
-<td><a href="delete/{{ phonenum.id }}">delete</a>
-<td><a href="update/{{ phonenum.id }}">edit</a></td>
-</tr>
-{% endfor %}
-</table>
-<center> 
+
+{% block body %}
+  <center> 
+  <h1 class="mt-4 mb-5 display-3">Phone Book</h1>
+  <div class="container mb-2">
+    <div class="d-flex">
+      <form class="form-inline" action="{% url 'search_results' %}" method="get" style="flex-grow: 1;">
+       <div class="d-flex gap-1">
+         <div class="form-group ">
+           <input type="text"  name="q" class="form-control" id="inputSearch" placeholder="Search">
+         </div>
+         <button type="submit" class="btn btn-dark" value="search"><i class="bi bi-search"></i></button>
+       </div>
+      </form>
+      <a href="/add" class="btn btn-primary">Add Contact</a>
+    </div>
+  </div>
+
+    <div class="container">
+      <table class="table border table-striped table-hover table-dark" style="border-radius: 8px; overflow:hidden;">
+        <thead class="thead-dark bg-dark text-light">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col" style="width: 70px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody >
+          {% for phonenum in phonenums %}
+          <tr>
+            <td>{{phonenum.name}}</td>
+            <td>{{phonenum.phone_num}}</td>
+            <td style="text-align: center;">
+              <a href="delete/{{ phonenum.id }}" class="text-danger"><i class="bi bi-trash3"></i></a>
+               &nbsp;
+              <a href="update/{{ phonenum.id }}" class="text-primary"><i class="bi bi-pencil-square"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+ 
+  <center> 
+{% endblock %}
