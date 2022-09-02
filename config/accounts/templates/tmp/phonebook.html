@@ -3,7 +3,11 @@
 
 {% block body %}
   <center> 
-  <h1 class="mt-4 mb-5 display-3">Phone Book</h1>
+  <div class="container my-3">
+    <div class="d-flex" style="align-items: center;">
+      <h1 class="display-6" style="flex-grow: 1;">Phone Book</h1>
+    </div>
+  </div>
   <div class="container mb-2">
     <div class="d-flex">
       <form class="form-inline" action="{% url 'search_results' %}" method="get" style="flex-grow: 1;">
