@@ -60,6 +60,11 @@ class Login(View):
 
 
             return redirect('phonebook/')
+        
+        return render (request,'tmp/login.html',{
+        'help_text': True, 
+        'form': AuthenticationForm
+        })
 
 def num(request):
     context = {

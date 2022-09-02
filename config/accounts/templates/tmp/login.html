@@ -9,15 +9,15 @@
             <p>
                 {{ field.label_tag }}<br>
                 {{ field }}
-                {% if field.help_text %}
-                <small style="color: grey">{{ field.help_text | safe }}</small>
-                {% endif %}
                 {% for error in field.errors %}
                 <p style="color: red">{{ error | safe }}</p>
                 {% endfor %}
             </p>
             {% endfor %}
             <button type='submit'>login</button>
+            {% if help_text %}
+            <small style="color: red">Username or password is wrong!</small>
+            {% endif %}
     </form>
     <a href="/signup">for create account press me</a>
 </body>
