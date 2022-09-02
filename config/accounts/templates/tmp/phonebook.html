@@ -1,8 +1,11 @@
+<center> 
 <h1>phone book</h1>
 <a href="/add">for add contact press me</a>
+<br/><br/><br/>
 
 <form action="{% url 'search_results' %}" method="get">
   <input name="q" type="text" placeholder="Search...">
+  <input type="submit" value="search">
 </form>
 <table border="1">
 {% for phonenum in phonenums %}
@@ -14,3 +17,4 @@
 </tr>
 {% endfor %}
 </table>
+<center> 
