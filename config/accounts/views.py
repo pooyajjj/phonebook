@@ -12,23 +12,28 @@ from django.urls import reverse
 
 
 class signup(View):
+    form_class = UserCreationForm
+
     def get(self, request):
-        return render(request, 'tmp/signup.html', {'form': UserCreationForm()},)
+        form = self.form_class
+        return render(request, 'tmp/signup.html', {'form': form})
     
     def post(self, request):
-        form = UserCreationForm(request.POST)
+        form = self.form_class(request.POST)
         if form.is_valid():
             user = form.save()
             return redirect('/')
 
-        return render(request, 'tmp/signup.html', {'form': UserCreationForm()})
+        return render(request, 'tmp/signup.html', {'form':form})
 
 class Login(View):
+    form_class = AuthenticationForm
+
     def get(self, request):
-        return render(request, 'tmp/login.html', {'form': AuthenticationForm })
+        return render(request, 'tmp/login.html', {'form': self.form_class })
 
     def post(self, request):
-        form = AuthenticationForm(request, data = request.POST)
+        form = self.form_class(request, data = request.POST)
         if form.is_valid():
             user = authenticate(
                 request,
